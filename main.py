@@ -5,6 +5,8 @@ from flask_restful import Resource, Api
 from flask import request
 from flask_cors import CORS
 
+from views.heroes import HeroesHandler, HeroHandler
+
 cred = firebase_admin.credentials.Certificate(
     './tourofheroes2joao-firebase-adminsdk-kzu0e-8e16191172.json')
 
@@ -36,6 +38,8 @@ class Index(Resource):
 
 # Nossa primeira url
 API.add_resource(Index, '/', endpoint='index')
+API.add_resource(HeroesHandler, '/heroes', endpoint='heroes')
+API.add_resource(HeroHandler, '/hero/<hero_id>', endpoint='hero')
 
 if __name__ == '__main__':
     # Isso é utilizado somente para executar a aplicação local. Quando
