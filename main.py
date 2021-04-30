@@ -6,6 +6,7 @@ from flask import request
 from flask_cors import CORS
 
 from views.heroes import HeroesHandler, HeroHandler
+from views.top_heroes import TopHeroesHandler
 
 cred = firebase_admin.credentials.Certificate(
     './tourofheroes2joao-firebase-adminsdk-kzu0e-8e16191172.json')
@@ -40,10 +41,11 @@ class Index(Resource):
 API.add_resource(Index, '/', endpoint='index')
 API.add_resource(HeroesHandler, '/heroes', endpoint='heroes')
 API.add_resource(HeroHandler, '/hero/<hero_id>', endpoint='hero')
+API.add_resource(TopHeroesHandler, '/top-heroes', endpoint='top-heroes')
 
 if __name__ == '__main__':
     # Isso é utilizado somente para executar a aplicação local. Quando
     # realizarmos o deploy para o Google App Engine, o webserver deles ira
     # iniciar a aplicação de outra forma
     app.run(host='127.0.0.1', port=8080, debug=True)
-# [END gae_python37_app]
+    # [END gae_python37_app]
